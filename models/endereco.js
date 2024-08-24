@@ -1,51 +1,52 @@
-const {Sequelize, DataType, Model, DataTypes} = require('sequelize');
-const Sequelize = new Sequelize ('sqlite::memory:');
 
-class Endereco extends Model {}
+const { Model, DataTypes } = require('sequelize');
 
-const Endereco = Sequelize.define({
+class Endereco extends Model { }
+
+module.exports = (sequelize) => {
+    Endereco.init({
         id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
-            alownull: false,
+            autoIncrement: true,
         },
         cep: {
             type: DataTypes.STRING,
-            alownull: false,
+            allowNull: false,
         },
-        logadouro: {
+        logradouro: {
             type: DataTypes.STRING,
-            alownull: false,
+            allowNull: false,
         },
         numero: {
             type: DataTypes.INTEGER,
-            alownull: false,
+            allowNull: false,
         },
         complemento: {
             type: DataTypes.STRING,
         },
         bairro: {
             type: DataTypes.STRING,
-            alownull: false,
+            allowNull: false,
         },
         cidade: {
             type: DataTypes.STRING,
-            alownull: false,
+            allowNull: false,
         },
         estado: {
             type: DataTypes.STRING,
-            primaryKey: true,
-            alownull: false,
+            allowNull: false,
         },
         municipioIBGE: {
-            type: DataTypes.INTEGER,
-            alownull: false,
+            type: DataTypes.STRING,
+            allowNull: false,
         },
-        //atributos do model são definidos aqui
-        //alowNull = para ver se tem nulo ou n
     }, {
         sequelize,
         modelName: 'Endereco',
-        tableName: 'enderecos', // nome da tabela
-        timestamps: true,
-});
+        tableName: 'enderecos',
+        timestamps: false,
+    });
+
+    return Endereco;
+};
